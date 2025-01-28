@@ -15,7 +15,6 @@ build-options:
     CPLUS_INCLUDE_PATH: "/app/plugins/devtools/include"
     
 modules:
-
   - name: sfml2
     buildsystem: cmake-ninja
     config-opts:
@@ -24,8 +23,9 @@ modules:
     post-install:
       - mkdir /app/plugins/devtools/include/SFML2
       - mv /app/plugins/devtools/include/SFML /app/plugins/devtools/include/SFML2/
-      - mkdir -p /app/plugins/devtools/lib/SFML2
-      - mv /app/plugins/devtools/lib/!(SFML2) /app/plugins/devtools/lib/SFML2/
+      - mkdir -p /app/plugins/devtools/SFML2
+      - mv /app/plugins/devtools/lib/* /app/plugins/devtools/SFML2/
+      - mv /app/plugins/devtools/SFML2 /app/plugins/devtools/lib/
     sources:
       - type: archive
         url: https://www.sfml-dev.org/files/SFML-2.6.2-sources.zip
