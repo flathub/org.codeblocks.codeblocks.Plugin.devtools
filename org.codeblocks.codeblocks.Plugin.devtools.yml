@@ -25,7 +25,7 @@ modules:
       - mkdir /app/plugins/devtools/include/SFML2
       - mv /app/plugins/devtools/include/SFML /app/plugins/devtools/include/SFML2/
       - mkdir -p /app/plugins/devtools/lib/SFML2
-      - mv /app/plugins/devtools/lib/* /app/plugins/devtools/lib/SFML2/
+      - mv /app/plugins/devtools/lib/!(SFML2) /app/plugins/devtools/lib/SFML2/
     sources:
       - type: archive
         url: https://www.sfml-dev.org/files/SFML-2.6.2-sources.zip
