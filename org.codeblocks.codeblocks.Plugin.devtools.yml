@@ -109,3 +109,12 @@ modules:
         commit: 5ff25322553c1870cf20a2e1ba6f20ed50d9fe9a
         tag: v3.2.6
         
+  - name: SDL3
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: git
+        url: https://github.com/libsdl-org/SDL.git
+        commit: 535d80badefc83c5c527ec5748f2a20d6a9310fe
+        tag: release-3.2.0
+        
