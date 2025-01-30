@@ -117,4 +117,40 @@ modules:
         url: https://github.com/libsdl-org/SDL.git
         commit: 535d80badefc83c5c527ec5748f2a20d6a9310fe
         tag: release-3.2.0
+
+  - name: SDL2
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: git
+        url: https://github.com/libsdl-org/SDL.git
+        commit: fa24d868ac2f8fd558e4e914c9863411245db8fd
+        tag: release-2.30.11
+
+  - name: SDL_ttf2
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: git
+        url: https://github.com/libsdl-org/SDL_ttf.git
+        commit: 2a891473eaf05ba1707a4b7913e6c4db7de7458a
+        tag: release-2.24.0
+        
+  - name: SDL_image2
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: git
+        url: https://github.com/libsdl-org/SDL_image.git
+        commit: 4641fd73853a60a448a2f352a865633bec6140e8
+        tag: release-2.8.4
+        
+  - name: SDL_mixer2
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: git
+        url: https://github.com/libsdl-org/SDL_mixer.git
+        commit: a37e09f85d321a13dfcf0d4432827ee09beeb623
+        tag: release-2.8.0
         
