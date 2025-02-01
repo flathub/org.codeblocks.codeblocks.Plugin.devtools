@@ -4,8 +4,8 @@
   <extends>org.codeblocks.codeblocks</extends>
   <name>DevTools</name>
   <summary>
-      Contains sfml2, sfml3, wxWidgets3, raylib5 and
-      fltk1.
+      Contains SFML2, SFML3, wxWidgets3.2, Raylib5, GLFW3.4 and
+      FLTK1.
       Plugin name: org.codeblocks.codeblocks.Plugin.devtools
   </summary>
   <project_license>GPL-2.0-or-later</project_license>
