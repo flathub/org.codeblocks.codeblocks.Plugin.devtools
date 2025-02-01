@@ -59,6 +59,14 @@ modules:
         url: https://archive.mesa3d.org/glu/glu-9.0.3.tar.xz
         sha256: bd43fe12f374b1192eb15fe20e45ff456b9bc26ab57f0eee919f96ca0f8a330f
 
+  - name: glut
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: archive
+        url: https://github.com/freeglut/freeglut/releases/download/v3.6.0/freeglut-3.6.0.tar.gz
+        sha256: 9c3d4d6516fbfa0280edc93c77698fb7303e443c1aaaf37d269e3288a6c3ea52
+
   - name: glfw
     buildsystem: cmake-ninja
     builddir: true
@@ -68,10 +76,13 @@ modules:
       - -DGLFW_BUILD_TESTS=OFF
       - -DGLFW_BUILD_DOCS=OFF
       - -DWITH_PIC=ON
+    post-install:
+      - ln -s /app/plugins/devtools/include/GLFW/glfw3.h /app/plugins/devtools/include/
+      - ln -s /app/plugins/devtools/include/GLFW/glfw3native.h /app/plugins/devtools/include/
     sources:
       - type: archive
-        url: https://github.com/glfw/glfw/releases/download/3.3.8/glfw-3.3.8.zip
-        sha256: 4d025083cc4a3dd1f91ab9b9ba4f5807193823e565a5bcf4be202669d9911ea6
+        url: https://github.com/glfw/glfw/releases/download/3.4/glfw-3.4.zip
+        sha256: b5ec004b2712fd08e8861dc271428f048775200a2df719ccf575143ba749a3e9
 
   - name: fltk
     buildsystem: cmake-ninja
