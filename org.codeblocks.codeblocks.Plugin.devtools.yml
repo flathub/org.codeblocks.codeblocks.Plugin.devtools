@@ -117,8 +117,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/wxWidgets/wxWidgets.git
-        commit: 5ff25322553c1870cf20a2e1ba6f20ed50d9fe9a
-        tag: v3.2.6
+        commit: d74ef99edca34d5b44b74875fcdf97cc236feb75
+        tag: v3.2.7
         
   - name: SDL3
     buildsystem: cmake-ninja
