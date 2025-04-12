@@ -21,9 +21,18 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DENABLE_BUBBLEWRAP_SANDBOX=OFF
       - -DENABLE_DOCUMENTATION=OFF
+      - -DENABLE_GAMEPAD=OFF
+      - -DENABLE_INTROSPECTION=OFF
+      - -DENABLE_MINIBROWSER=OFF
+      - -DENABLE_SPEECH_SYNTHESIS=OFF
+      - -DENABLE_WEBDRIVER=OFF
       - -DPORT=GTK
       - -DUSE_GTK4=OFF
+      - -DUSE_LIBBACKTRACE=OFF
+      - -DUSE_LIBSECRET=OFF
       - -DENABLE_SPELLCHECK=OFF
+      - -DUSE_WOFF2=OFF
+      - -DUSE_SYSTEM_SYSPROF_CAPTURE=NO
     sources:
       - type: archive
         url: https://webkitgtk.org/releases/webkitgtk-2.49.1.tar.xz
