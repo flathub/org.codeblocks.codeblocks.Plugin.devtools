@@ -15,6 +15,20 @@ build-options:
     CPLUS_INCLUDE_PATH: "/app/plugins/devtools/include"
     
 modules:
+  - name: webkitgtk # wxwidgets
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DENABLE_BUBBLEWRAP_SANDBOX=OFF
+      - -DENABLE_DOCUMENTATION=OFF
+      - -DPORT=GTK
+      - -DUSE_GTK4=OFF
+      - -DENABLE_SPELLCHECK=OFF
+    sources:
+      - type: archive
+        url: https://webkitgtk.org/releases/webkitgtk-2.49.1.tar.xz
+        sha256: 9c0a5ed606a7a6bdc71c2545633200c5a9a657639b0b6b1ec01f92f21d47ecba
+        
   - name: sfml2
     buildsystem: cmake-ninja
     config-opts:
