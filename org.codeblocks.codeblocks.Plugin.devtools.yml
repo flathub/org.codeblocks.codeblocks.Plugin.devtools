@@ -15,6 +15,52 @@ build-options:
     CPLUS_INCLUDE_PATH: "/app/plugins/devtools/include"
     
 modules:
+  - name: unifdef # webkitgtk
+    no-autogen: true
+    make-install-args:
+      - prefix=${FLATPAK_DEST}
+    cleanup:
+      - '*'
+    sources:
+      - type: archive
+        url: https://dotat.at/prog/unifdef/unifdef-2.12.tar.xz
+        sha256: 43ce0f02ecdcdc723b2475575563ddb192e988c886d368260bc0a63aee3ac400
+        
+  - name: webkitgtk # wxwidgets
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DENABLE_BUBBLEWRAP_SANDBOX=OFF
+      - -DENABLE_DOCUMENTATION=OFF
+      - -DENABLE_GAMEPAD=OFF
+      - -DENABLE_INTROSPECTION=OFF
+      - -DENABLE_MINIBROWSER=OFF
+      - -DENABLE_SPEECH_SYNTHESIS=OFF
+      - -DENABLE_WEBDRIVER=OFF
+      - -DPORT=GTK
+      - -DUSE_GTK4=OFF
+      - -DUSE_LIBBACKTRACE=OFF
+      - -DUSE_LIBSECRET=OFF
+      - -DENABLE_SPELLCHECK=OFF
+      - -DUSE_WOFF2=OFF
+      - -DUSE_SYSTEM_SYSPROF_CAPTURE=NO
+    sources:
+      - type: archive
+        url: https://webkitgtk.org/releases/webkitgtk-2.49.1.tar.xz
+        sha256: 9c0a5ed606a7a6bdc71c2545633200c5a9a657639b0b6b1ec01f92f21d47ecba
+        
+  - name: wxwidgets
+    buildsystem: autotools
+    builddir: true
+    config-opts:
+      - --with-gtk=3
+      - --enable-webview
+    sources:
+      - type: git
+        url: https://github.com/wxWidgets/wxWidgets.git
+        commit: d74ef99edca34d5b44b74875fcdf97cc236feb75
+        tag: v3.2.7
+        
   - name: sfml2
     buildsystem: cmake-ninja
     config-opts:
@@ -107,18 +153,6 @@ modules:
       - type: archive
         url: https://github.com/raysan5/raylib/archive/refs/tags/5.5.tar.gz
         sha256: aea98ecf5bc5c5e0b789a76de0083a21a70457050ea4cc2aec7566935f5e258e
-
-  - name: wxwidgets
-    buildsystem: autotools
-    builddir: true
-    config-opts:
-      - --with-gtk=3
-      - --disable-webview
-    sources:
-      - type: git
-        url: https://github.com/wxWidgets/wxWidgets.git
-        commit: d74ef99edca34d5b44b74875fcdf97cc236feb75
-        tag: v3.2.7
         
   - name: SDL3
     buildsystem: cmake-ninja
