@@ -1,7 +1,7 @@
 id: org.codeblocks.codeblocks.Plugin.devtools
 runtime: org.codeblocks.codeblocks
 runtime-version: stable
-sdk: org.freedesktop.Sdk//24.08
+sdk: org.freedesktop.Sdk//25.08
 build-extension: true
 separate-locales: false
 build-options:
@@ -27,9 +27,10 @@ modules:
       - mv /app/plugins/devtools/lib/* /app/plugins/devtools/SFML2/
       - mv /app/plugins/devtools/SFML2 /app/plugins/devtools/lib/
     sources:
-      - type: archive
-        url: https://www.sfml-dev.org/files/SFML-2.6.2-sources.zip
-        sha256: 19d6dbd9c901c74441d9888c13cb1399f614fe8993d59062a72cfbceb00fed04
+      - type: git
+        url: https://github.com/SFML/SFML.git
+        commit: 5383d2b3948f805af55c9f8a4587ac72ec5981d1
+        tag: 2.6.2
         
   - name: sfml3
     buildsystem: cmake-ninja
@@ -62,10 +63,12 @@ modules:
   - name: glut
     buildsystem: cmake-ninja
     builddir: true
+    config-opts:
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     sources:
-      - type: archive
-        url: https://github.com/freeglut/freeglut/releases/download/v3.6.0/freeglut-3.6.0.tar.gz
-        sha256: 9c3d4d6516fbfa0280edc93c77698fb7303e443c1aaaf37d269e3288a6c3ea52
+      - type: git
+        url: https://github.com/freeglut/freeglut.git
+        commit: 1f1c0c11e9e900fa32948714f4d184952406b0f3
 
   - name: glfw
     buildsystem: cmake-ninja
@@ -117,8 +120,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/wxWidgets/wxWidgets.git
-        commit: d74ef99edca34d5b44b74875fcdf97cc236feb75
-        tag: v3.2.7
+        commit: 49c6810948f40c457e3d0848b9111627b5b61de5
+        tag: v3.3.1
         
   - name: SDL3
     buildsystem: cmake-ninja
@@ -126,6 +129,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/libsdl-org/SDL.git
-        commit: 535d80badefc83c5c527ec5748f2a20d6a9310fe
-        tag: release-3.2.0
+        commit: badbf8da4ee72b3ef599c721ffc9899e8d7c8d90
+        tag: release-3.2.26
         
