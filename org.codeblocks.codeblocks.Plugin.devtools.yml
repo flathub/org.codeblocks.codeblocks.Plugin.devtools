@@ -46,9 +46,9 @@ modules:
       - mv /app/plugins/devtools/SFML3/SFML2 /app/plugins/devtools/lib/
       - mv /app/plugins/devtools/SFML3 /app/plugins/devtools/lib/
     sources:
-      - type: archive
-        url: https://github.com/SFML/SFML/releases/download/3.0.0/SFML-3.0.0-sources.zip
-        sha256: 8cc41db46b59f07c44ecf21c74a0f956d37735dec9d90ff4522856cb162ba642
+      - type: git
+        url: https://github.com/SFML/SFML.git
+        tag: 3.0.2
       - type: file
         path: org.codeblocks.codeblocks.Plugin.devtools.metainfo.xml
 
