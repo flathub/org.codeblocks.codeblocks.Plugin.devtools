@@ -93,8 +93,8 @@ modules:
       - -DFLTK_BUILD_SHARED_LIBS=ON
     sources:
       - type: archive
-        url: https://github.com/fltk/fltk/releases/download/release-1.4.1/fltk-1.4.1-source.tar.gz
-        sha256: 7d0a5a352fde0beae44a2009c1aca1d6be15d46dd251d1c12cf34d752b429038
+        url: https://github.com/fltk/fltk/releases/download/release-1.4.4/fltk-1.4.4-source.tar.gz
+        sha256: 94b464cce634182c8407adac1be5fc49678986ca93285699b444352af89b4efe
 
   - name: raylib
     buildsystem: cmake-ninja
