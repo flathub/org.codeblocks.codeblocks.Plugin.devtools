@@ -129,6 +129,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/libsdl-org/SDL.git
-        commit: badbf8da4ee72b3ef599c721ffc9899e8d7c8d90
-        tag: release-3.2.26
+        commit: 683181b47cfabd293e3ea409f838915b8297a4fd
+        tag: release-3.4.2
         
