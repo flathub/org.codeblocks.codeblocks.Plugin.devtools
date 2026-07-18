@@ -32,7 +32,15 @@ modules:
         commit: 5383d2b3948f805af55c9f8a4587ac72ec5981d1
         tag: 2.6.2
         
-  - name: sfml3
+  - name: mbedtls
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: git
+        url: https://github.com/Mbed-TLS/mbedtls.git
+        tag: v4.2.0
+        
+  - name: sfml3 #mbedtls
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_SHARED_LIBS=ON
