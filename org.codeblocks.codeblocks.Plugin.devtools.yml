@@ -25,32 +25,29 @@ modules:
       - mv /app/plugins/devtools/include/SFML /app/plugins/devtools/include/SFML2/
       - mkdir -p /app/plugins/devtools/SFML2
       - mv /app/plugins/devtools/lib/* /app/plugins/devtools/SFML2/
-      - mv /app/plugins/devtools/SFML2 /app/plugins/devtools/lib/
     sources:
       - type: git
         url: https://github.com/SFML/SFML.git
         commit: 5383d2b3948f805af55c9f8a4587ac72ec5981d1
         tag: 2.6.2
         
-  - name: sfml3
+  - name: sfml3 
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_SHARED_LIBS=ON
+      - -DCMAKE_BUILD_TYPE=Release
     builddir: true
     post-install: 
-      - install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo ../${FLATPAK_ID}.metainfo.xml
       - mkdir /app/plugins/devtools/include/SFML3
       - mv /app/plugins/devtools/include/SFML /app/plugins/devtools/include/SFML3/
       - mkdir -p /app/plugins/devtools/SFML3
       - mv /app/plugins/devtools/lib/* /app/plugins/devtools/SFML3/
-      - mv /app/plugins/devtools/SFML3/SFML2 /app/plugins/devtools/lib/
+      - mv /app/plugins/devtools/SFML2 /app/plugins/devtools/lib/
       - mv /app/plugins/devtools/SFML3 /app/plugins/devtools/lib/
     sources:
       - type: git
         url: https://github.com/SFML/SFML.git
         tag: 3.0.2
-      - type: file
-        path: org.codeblocks.codeblocks.Plugin.devtools.metainfo.xml
 
   - name: glu #fltk
     buildsystem: meson
@@ -92,9 +89,9 @@ modules:
     config-opts:
       - -DFLTK_BUILD_SHARED_LIBS=ON
     sources:
-      - type: archive
-        url: https://github.com/fltk/fltk/releases/download/release-1.4.4/fltk-1.4.4-source.tar.gz
-        sha256: 94b464cce634182c8407adac1be5fc49678986ca93285699b444352af89b4efe
+      - type: git
+        url: https://github.com/fltk/fltk.git
+        tag: release-1.4.5
 
   - name: raylib
     buildsystem: cmake-ninja
@@ -108,26 +105,40 @@ modules:
       - -DPLATFORM=Desktop
     sources:
       - type: archive
-        url: https://github.com/raysan5/raylib/archive/refs/tags/5.5.tar.gz
-        sha256: aea98ecf5bc5c5e0b789a76de0083a21a70457050ea4cc2aec7566935f5e258e
+        url: https://github.com/raysan5/raylib/archive/refs/tags/6.0.tar.gz
+        sha256: 2b3ee1e2120c7a0796b33062c7e9a694dd8a8caa56a96319ac8c8ecf54a90d0b
 
   - name: wxwidgets
     buildsystem: autotools
-    builddir: true
+    no-autogen: true
     config-opts:
       - --with-gtk=3
       - --disable-webview
     sources:
-      - type: git
-        url: https://github.com/wxWidgets/wxWidgets.git
-        tag: v3.3.2
-        
+      - type: archive
+        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.3.3/wxWidgets-3.3.3.tar.bz2
+        sha256: 81b09d6dd9f1ed9301f8c55a968a488d0491f264dc2bab19a7e407ac67009482
+        x-checker-data:
+          type: anitya
+          project-id: 5150
+          stable-only: true
+          url-template: https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2
+          
   - name: SDL3
     buildsystem: cmake-ninja
     builddir: true
     sources:
       - type: git
         url: https://github.com/libsdl-org/SDL.git
-        commit: 683181b47cfabd293e3ea409f838915b8297a4fd
-        tag: release-3.4.2
+        commit: f87239e71e42da91ca317a12eefb82cfbf3393eb
+        tag: release-3.4.12
+
+  - name: data
+    buildsystem: simple
+    build-commands:
+      - install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo ${FLATPAK_ID}.metainfo.xml
+    sources:
+      - type: file
+        path: org.codeblocks.codeblocks.Plugin.devtools.metainfo.xml
+    
         
