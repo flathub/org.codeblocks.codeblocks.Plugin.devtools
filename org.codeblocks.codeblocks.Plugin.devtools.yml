@@ -25,14 +25,34 @@ modules:
       - mv /app/plugins/devtools/include/SFML /app/plugins/devtools/include/SFML2/
       - mkdir -p /app/plugins/devtools/SFML2
       - mv /app/plugins/devtools/lib/* /app/plugins/devtools/SFML2/
-      - mv /app/plugins/devtools/SFML2 /app/plugins/devtools/lib/
     sources:
       - type: git
         url: https://github.com/SFML/SFML.git
         commit: 5383d2b3948f805af55c9f8a4587ac72ec5981d1
         tag: 2.6.2
         
-  - name: mbedtls
+  - name: python3-jsonschema #mbedtls
+    buildsystem: simple
+    build-commands:
+      - pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"jsonschema\" --no-build-isolation
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/b7/de/f7192e12b21b9e9a68a6d0f249b4af3fdcdff8418be0767a627564afa1f1/rpds_py-0.30.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+        sha256: 9027da1ce107104c50c81383cae773ef5c24d296dd11c99e2629dbd7967a20c6
+      - type: file
+        url: https://files.pythonhosted.org/packages/64/b4/17d4b0b2a2dc85a6df63d1157e028ed19f90d4cd97c36717afef2bc2f395/attrs-26.1.0-py3-none-any.whl
+        sha256: c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309
+      - type: file
+        url: https://files.pythonhosted.org/packages/2c/58/ca301544e1fa93ed4f80d724bf5b194f6e4b945841c5bfd555878eea9fcb/referencing-0.37.0-py3-none-any.whl
+        sha256: 381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231
+      - type: file
+        url: https://files.pythonhosted.org/packages/41/45/1a4ed80516f02155c51f51e8cedb3c1902296743db0bbc66608a0db2814f/jsonschema_specifications-2025.9.1-py3-none-any.whl
+        sha256: 98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe
+      - type: file
+        url: https://files.pythonhosted.org/packages/69/90/f63fb5873511e014207a475e2bb4e8b2e570d655b00ac19a9a0ca0a385ee/jsonschema-4.26.0-py3-none-any.whl
+        sha256: d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce
+        
+  - name: mbedtls #sfml3
     buildsystem: cmake-ninja
     builddir: true
     sources:
@@ -40,26 +60,23 @@ modules:
         url: https://github.com/Mbed-TLS/mbedtls.git
         tag: v4.2.0
         
-  - name: sfml3 #mbedtls
+  - name: sfml3 
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_SHARED_LIBS=ON
       - -DCMAKE_BUILD_TYPE=Release
     builddir: true
     post-install: 
-      - install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo ../${FLATPAK_ID}.metainfo.xml
       - mkdir /app/plugins/devtools/include/SFML3
       - mv /app/plugins/devtools/include/SFML /app/plugins/devtools/include/SFML3/
       - mkdir -p /app/plugins/devtools/SFML3
       - mv /app/plugins/devtools/lib/* /app/plugins/devtools/SFML3/
-      - mv /app/plugins/devtools/SFML3/SFML2 /app/plugins/devtools/lib/
+      - mv /app/plugins/devtools/SFML2 /app/plugins/devtools/lib/
       - mv /app/plugins/devtools/SFML3 /app/plugins/devtools/lib/
     sources:
       - type: git
         url: https://github.com/SFML/SFML.git
         tag: 3.1.0
-      - type: file
-        path: org.codeblocks.codeblocks.Plugin.devtools.metainfo.xml
 
   - name: glu #fltk
     buildsystem: meson
@@ -144,4 +161,13 @@ modules:
         url: https://github.com/libsdl-org/SDL.git
         commit: f87239e71e42da91ca317a12eefb82cfbf3393eb
         tag: release-3.4.12
+
+  - name: data
+    buildsystem: simple
+    build-commands:
+      - install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo ../${FLATPAK_ID}.metainfo.xml
+    sources:
+      - type: file
+        path: org.codeblocks.codeblocks.Plugin.devtools.metainfo.xml
+    
         
