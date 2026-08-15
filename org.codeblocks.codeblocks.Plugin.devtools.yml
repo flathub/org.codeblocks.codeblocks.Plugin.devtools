@@ -5,15 +5,14 @@ sdk: org.freedesktop.Sdk//25.08
 build-extension: true
 separate-locales: false
 build-options:
-  prefix: "/app/plugins/devtools"
-  prepend-path: "/app/plugins/devtools/bin"
-  append-ld-library-path: "/app/plugins/devtools/lib:/app/plugins/devtools/lib64"
-  append-pkg-config-path: "/app/plugins/devtools/lib/pkgconfig:/app/plugins/devtools/lib64/pkgconfig"
-  ldflags: "-L/app/plugins/devtools/lib -L/app/plugins/devtools/lib64"
+  prefix: /app/plugins/devtools
+  prepend-path: /app/plugins/devtools/bin
+  append-ld-library-path: /app/plugins/devtools/lib:/app/plugins/devtools/lib64
+  append-pkg-config-path: /app/plugins/devtools/lib/pkgconfig:/app/plugins/devtools/lib64/pkgconfig
+  ldflags: -L/app/plugins/devtools/lib -L/app/plugins/devtools/lib64
   env:
-    C_INCLUDE_PATH: "/app/plugins/devtools/include"
-    CPLUS_INCLUDE_PATH: "/app/plugins/devtools/include"
-    
+    C_INCLUDE_PATH: /app/plugins/devtools/include
+    CPLUS_INCLUDE_PATH: /app/plugins/devtools/include
 modules:
   - name: sfml2
     buildsystem: cmake-ninja
@@ -30,14 +29,14 @@ modules:
         url: https://github.com/SFML/SFML.git
         commit: 5383d2b3948f805af55c9f8a4587ac72ec5981d1
         tag: 2.6.2
-        
-  - name: sfml3 
+
+  - name: sfml3
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_SHARED_LIBS=ON
       - -DCMAKE_BUILD_TYPE=Release
     builddir: true
-    post-install: 
+    post-install:
       - mkdir /app/plugins/devtools/include/SFML3
       - mv /app/plugins/devtools/include/SFML /app/plugins/devtools/include/SFML3/
       - mkdir -p /app/plugins/devtools/SFML3
@@ -116,14 +115,14 @@ modules:
       - --disable-webview
     sources:
       - type: archive
-        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.3.3/wxWidgets-3.3.3.tar.bz2
-        sha256: 81b09d6dd9f1ed9301f8c55a968a488d0491f264dc2bab19a7e407ac67009482
+        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.11/wxWidgets-3.2.11.tar.bz2
+        sha256: 6a129015bce2e914e4bf61ec4411854ad962801d47e92f2eb8340adb6a90af08
         x-checker-data:
           type: anitya
           project-id: 5150
           stable-only: true
           url-template: https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2
-          
+
   - name: SDL3
     buildsystem: cmake-ninja
     builddir: true
@@ -140,5 +139,5 @@ modules:
     sources:
       - type: file
         path: org.codeblocks.codeblocks.Plugin.devtools.metainfo.xml
-    
-        
+
+
